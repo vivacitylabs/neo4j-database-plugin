@@ -207,7 +207,8 @@ func (c *ConnectionProducer) getConnection(ctx context.Context) (neo4j.DriverWit
 
 func (c *ConnectionProducer) SecretValues() map[string]string {
 	return map[string]string{
-		c.Password: "[password]",
+		c.Password:  "[password]",
+		c.TLSKeyPEM: "[tls_key_pem]",
 	}
 }
 
