@@ -21,7 +21,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
       - name: Install gox
-        run: sudo apt install -y gox
+        run: sudo apt install -y gox golang-1.18-go
       - name: Run build script
         run: scripts/build.sh
         shell: bash
