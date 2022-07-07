@@ -20,20 +20,16 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-      - name: Download Golang 1.18.3
-        run: curl -L https://go.dev/dl/go1.18.3.linux-amd64.tar.gz --output go1.18.3.linux-amd64.tar.gz
-      - name: Remove previous Go installation
-        run: sudo rm -rf /usr/local/go
-      - name: Install Golang 1.18.3
-        run: sudo tar -C /usr/local -xzf go1.18.3.linux-amd64.tar.gz
+      - name: Install Golang 1.18 or higher
+        uses: actions/setup-go@v3
+        with:
+          go-version: '>=1.18.0'
       - name: Install gox
-        run: sudo go install github.com/mitchellh/gox@latest
+        run: go install github.com/mitchellh/gox@latest
       - name: print a bunch of stuff
         run: |
             export PATH=$PATH:$HOME/go/bin
             echo $PATH
-            go env GOPATH
-            ls $(go env GOPATH)
       - name: Run build script
         run: scripts/build.sh
         shell: bash
