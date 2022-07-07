@@ -28,6 +28,8 @@ jobs:
         run: sudo tar -C /usr/local -xzf go1.18.3.linux-amd64.tar.gz
       - name: Install gox
         run: go install github.com/mitchellh/gox@latest
+      - name: Add Go binaries to system PATH
+        run: export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
       - name: Print gox help
         run: gox -h
       - name: Run build script
