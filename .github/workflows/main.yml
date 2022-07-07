@@ -32,8 +32,8 @@ jobs:
         run: |
             export PATH=$PATH:$HOME/go/bin
             echo $PATH
-            ls /go
-            /go/gox -h
+            go env GOPATH
+            ls $(go env GOPATH)
       - name: Run build script
         run: scripts/build.sh
         shell: bash
