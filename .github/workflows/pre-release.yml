@@ -22,6 +22,11 @@ jobs:
           
       - name: Install gox
         run: go install github.com/mitchellh/gox@latest
+
+      - name: Run tests
+        run: |
+              cd neo4j
+              go test -v
         
       - name: Run build script
         run: scripts/build.sh
