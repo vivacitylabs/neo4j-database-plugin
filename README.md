@@ -1,4 +1,4 @@
-# neo4j-database-plugin
+# Vault Plugin for Neo4j Secrets Engine
 ### Build the plugin
 ```
 make
@@ -6,7 +6,7 @@ make
 The printed sha256sum will be required when registering the plugin later.
 
 
-### Try it out
+### Run locally
 
 1) Start a local neo4j container with root username `neo4j` and password `secret`
 ```bash
