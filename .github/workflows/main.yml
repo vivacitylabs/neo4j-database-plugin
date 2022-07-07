@@ -23,7 +23,7 @@ jobs:
       - name: Install gox
         run: sudo apt update && sudo apt install -y gox
       - name: Download Golang 1.18.3
-        run: curl https://go.dev/dl/go1.18.3.linux-amd64.tar.gz
+        run: curl -L https://go.dev/dl/go1.18.3.linux-amd64.tar.gz --output go1.18.3.linux-amd64.tar.gz
       - name: Remove previous Go installation
         run: sudo rm -rf /usr/local/go
       - name: Install Golang 1.18.3
