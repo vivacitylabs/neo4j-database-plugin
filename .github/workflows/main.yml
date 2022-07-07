@@ -1,15 +1,11 @@
 name: Pre-Release
 
-# Controls when the workflow will run
 on:
-  # Triggers the workflow on push or pull request events but only for the "master" branch
   push:
     branches: [ "master" ]
 
-  # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   pre-release:
     name: "Pre Release"
@@ -18,21 +14,21 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
+        
       - name: Install Golang 1.18 or higher
         uses: actions/setup-go@v3
         with:
           go-version: '>=1.18.0'
+          
       - name: Install gox
         run: go install github.com/mitchellh/gox@latest
-      - name: print a bunch of stuff
-        run: |
-            export PATH=$PATH:$HOME/go/bin
-            echo $PATH
+        
       - name: Run build script
         run: scripts/build.sh
         shell: bash
-
-      - uses: "marvinpinto/action-automatic-releases@latest"
+        
+      - name: Release commit
+        uses: "marvinpinto/action-automatic-releases@latest"
         with:
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
           automatic_release_tag: "latest"
