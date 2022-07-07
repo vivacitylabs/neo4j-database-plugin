@@ -1,0 +1,38 @@
+name: Pre-Release
+
+on:
+  push:
+    branches: [ "master" ]
+
+  workflow_dispatch:
+
+jobs:
+  pre-release:
+    name: "Pre Release"
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        
+      - name: Install Golang 1.18 or higher
+        uses: actions/setup-go@v3
+        with:
+          go-version: '>=1.18.0'
+          
+      - name: Install gox
+        run: go install github.com/mitchellh/gox@latest
+        
+      - name: Run build script
+        run: scripts/build.sh
+        shell: bash
+        
+      - name: Release commit
+        uses: "marvinpinto/action-automatic-releases@latest"
+        with:
+          repo_token: "${{ secrets.GITHUB_TOKEN }}"
+          automatic_release_tag: "latest"
+          prerelease: true
+          title: "Development Build"
+          files: |
+              pkg/*
