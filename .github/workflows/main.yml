@@ -26,18 +26,14 @@ jobs:
         run: sudo rm -rf /usr/local/go
       - name: Install Golang 1.18.3
         run: sudo tar -C /usr/local -xzf go1.18.3.linux-amd64.tar.gz
-      - name: Set GOPATH
-        run: export GOPATH=$HOME/go
       - name: Install gox
-        run: sudo go install github.com/mitchellh/gox@latest
-      - name: Add Go binaries to system PATH
-        run: export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
+        run: GOPATH=$HOME/go sudo go install github.com/mitchellh/gox@latest
       - name: print a bunch of stuff
         run: |
-            echo $GOPATH
-            ls $GOPATH/bin
-      - name: Print gox help
-        run: gox -h
+            export PATH=$PATH:$HOME/go/bin
+            echo $PATH
+            ls $HOME/go
+            gox -h
       - name: Run build script
         run: scripts/build.sh
         shell: bash
