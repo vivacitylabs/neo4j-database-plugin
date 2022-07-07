@@ -20,14 +20,14 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-      - name: Install gox
-        run: sudo apt update && sudo apt install -y gox
       - name: Download Golang 1.18.3
         run: curl -L https://go.dev/dl/go1.18.3.linux-amd64.tar.gz --output go1.18.3.linux-amd64.tar.gz
       - name: Remove previous Go installation
         run: sudo rm -rf /usr/local/go
       - name: Install Golang 1.18.3
         run: sudo tar -C /usr/local -xzf go1.18.3.linux-amd64.tar.gz
+      - name: Install gox
+        run: go install github.com/mitchellh/gox@latest
       - name: Run build script
         run: scripts/build.sh
         shell: bash
