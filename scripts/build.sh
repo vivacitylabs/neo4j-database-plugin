@@ -48,6 +48,8 @@ fi
 
 # Build!
 echo "==> Building..."
+# Ensures all binaries are statically linked
+export CGO_ENABLED=0
 gox \
     -osarch="${XC_OSARCH}" \
     -ldflags "-X github.com/vivacitylabs/${TOOL}/version.GitCommit='${GIT_COMMIT}${GIT_DIRTY}'" \
